@@ -1,90 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="./styles/master.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="calculator">
-        <div class="display">
-          <span class="current-value" id="value">0</span>
-        </div>
-        <div class="buttons">
-          <div class="clear-row row">
-            <div class="clear button">
-              <span onclick="clearAll()">C</span>
-            </div>
-            <div class="clear button">
-              <span onclick="clearEntry()">CE</span>
-            </div>
-            <div class="operator button">
-              <span id="div" onclick="applyOperator(this)">/</span>
-            </div>
-            <div class="operator button">
-              <span id="mult" onclick="applyOperator(this)">*</span>
-            </div>
-          </div>
-          <div class="seven-row row">
-            <div class="number button">
-              <span id="7" onclick="buttonPress(this)">7</span>
-            </div>
-            <div class="number button">
-              <span id="8" onclick="buttonPress(this)">8</span>
-            </div>
-            <div class="number button">
-              <span id="9" onclick="buttonPress(this)">9</span>
-            </div>
-            <div class="operator button">
-              <span id="sub" onclick="applyOperator(this)">-</span>
-            </div>
-          </div>
-          <div class="four-row row">
-            <div class="number button">
-              <span id="4" onclick="buttonPress(this)">4</span>
-            </div>
-            <div class="number button">
-              <span id="5" onclick="buttonPress(this)">5</span>
-            </div>
-            <div class="number button">
-              <span id="6" onclick="buttonPress(this)">6</span>
-            </div>
-            <div class="operator button">
-              <span id="add" onclick="applyOperator(this)">+</span>
-            </div>
-          </div>
-          <div class="one-row row">
-            <div class="number button" >
-              <span id="1" onclick="buttonPress(this)">1</span>
-            </div>
-            <div class="number button">
-              <span id="2" onclick="buttonPress(this)">2</span>
-            </div>
-            <div class="number button">
-              <span id="3" onclick="buttonPress(this)">3</span>
-            </div>
-            <div class="operator button">
-              <span onclick="doMath(currentValue, previousValue, operandPressed)">=</span>
-            </div>
-          </div>
-          <div class="zero-row row">
-            <div class="number button">
-              <span id="0" onclick="buttonPress(this)">0</span>
-            </div>
-            <div class="period number button">
-              <span id="point" onclick="buttonPress(this)">.</span>
-            </div>
-          </div>
-        </div>
-
+<head>
+  <meta charset="utf-8">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="./styles/master.css">
+</head>
+<body>
+  <div class="container">
+    <div class="calculator">
+      <div class="display">
+        <span class="current-value" id="value">0</span>
       </div>
+      <div class="all-buttons">
+        <div class="clear-row row">
+          <div class="clear button">
+            <span onclick="clearAll()">C</span>
+          </div>
+          <div class="number button">
+            <span id="7" onclick="buttonPress(this)">7</span>
+          </div>
+          <div class="number button">
+            <span id="4" onclick="buttonPress(this)">4</span>
+          </div>
+          <div class="number button" >
+            <span id="1" onclick="buttonPress(this)">1</span>
+          </div>
+          <div class="number button">
+            <span id="0" onclick="buttonPress(this)">0</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="clear button">
+            <span onclick="clearEntry()">CE</span>
+          </div>
+          <div class="number button">
+            <span id="8" onclick="buttonPress(this)">8</span>
+          </div>
+          <div class="number button">
+            <span id="5" onclick="buttonPress(this)">5</span>
+          </div>
+          <div class="number button">
+            <span id="2" onclick="buttonPress(this)">2</span>
+          </div>
+        </div>
+        <div class="four-row row">
+          <div class="operator button">
+            <span id="div" onclick="applyOperator(this)">/</span>
+          </div>
+          <div class="number button">
+            <span id="9" onclick="buttonPress(this)">9</span>
+          </div>
+          <div class="number button">
+            <span id="6" onclick="buttonPress(this)">6</span>
+          </div>
+          <div class="number button">
+            <span id="3" onclick="buttonPress(this)">3</span>
+          </div>
+          <div class="period number button">
+            <span id="point" onclick="buttonPress(this)">.</span>
+          </div>
 
+        </div>
+        <div class="row">
+          <div class="operator button">
+            <span id="multi" onclick="applyOperator(this)">*</span>
+          </div>
+          <div class="operator button">
+            <span id="sub" onclick="applyOperator(this)">-</span>
+          </div>
+          <div class="operator button">
+            <span id="add" onclick="applyOperator(this)">+</span>
+          </div>
+          <div class="operator button">
+            <span onclick="doMath(currentValue, previousValue, operandPressed)">=</span>
+          </div>
+        </div>
+        <div class="zero-row row">
+        </div>
+      </div>
     </div>
-    <script
+  </div>
+  <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./resources/main.js"></script>
-  </body>
+  <script type="text/javascript" src="./resources/main.js"></script>
+</body>
 </html>

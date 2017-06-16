@@ -1,6 +1,25 @@
 /*will need a monospace format font.*/
+html{
+  font-size: 16px;
+}
 
 *,
 body {
   border: 1px dotted green;
+}
+
+.all-buttons{
+  display: flex;
+}
+
+.button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f0f;
+  color: #fff;
+}
+.button span {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
 }
