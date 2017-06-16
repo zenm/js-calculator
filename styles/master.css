@@ -1,0 +1,6 @@
+/*will need a monospace format font.*/
+
+*,
+body {
+  border: 1px dotted green;
+}
