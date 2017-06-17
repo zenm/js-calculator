@@ -5,7 +5,7 @@ function getCurrentValue() {
 
 //function to clear entry
 function clearEntry() {
-  document.getElementById("value").textContent = "";
+  document.getElementById("value").textContent = "0";
 }
 
 //function to clear all
@@ -13,21 +13,31 @@ function clearAll(){
   clearEntry();
   previousValue = 0;
   currentValue = 0;
-  operandPressed = "";
+  operatorPressed = "";
   result = 0;
   hasDoneMath = false;
   hasPrevValue = false;
+  displayToBreadcrumbs("");
   document.getElementById("value").textContent = currentValue;
 }
+
+var currentValue = 0;
 //when I press a button, then I see that value show up in the display.
+
 function buttonPress(value){
+  var numberPressed = value.textContent;
+
   if (hasDoneMath){
     clearEntry();
     document.getElementById("value").textContent = numberPressed;
     currentValue = getCurrentValue();
     hasDoneMath = false;
   }
-  var numberPressed = value.textContent;
+  //reset entry if you pressed and operator and you have a previous value
+  if (lastThingPressed == "operator" && hasPrevValue == true){
+    clearEntry();
+    console.log("Do I get here?");
+  }
   currentValue = getCurrentValue();
   if (currentValue == "0") {
     document.getElementById("value").textContent = numberPressed;
@@ -36,28 +46,39 @@ function buttonPress(value){
     document.getElementById("value").textContent = currentValue + numberPressed;
     currentValue = getCurrentValue();
   }
-  console.log(currentValue);
-
+  lastThingPressed = "operand";
   return currentValue;
-}
-var hasCurrValue = true;
-var hasPrevValue = false;
-var currentValue = 0;
-var previousValue = 0;
-var operandPressed = "";
-var result = 0;
 
-// when I click on an operator, then the input goes out
-// when I click on an operator, and I've inputed values before, then I can keep chaining operations.
-function applyOperator(operand) {
-  if (hasCurrValue && hasPrevValue) {
-    doMath(currentValue, previousValue, operandPressed);
-  } else {
-  operandPressed = operand.textContent;
-  hasPrevValue = true;
-  previousValue = currentValue;
-  clearEntry();
+}
+
+var previousValue = 0;
+var operatorPressed = "";
+var result = 0;
+var hasPrevValue = false;
+var lastThingPressed ="";
+
+// when I click on an operator, then I've recorded the operator sign
+function applyOperator(operator) {
+  //capture operator in variable
+  operatorPressed = operator.textContent;
+  currentValue = getCurrentValue();
+  if (hasPrevValue == true){
+    console.log("currentValue" + currentValue +" + "+"previousValue " + previousValue);
+    
   }
+
+  previousValue = currentValue;
+
+  displayToBreadcrumbs(getBreadCrumb()+" " + previousValue + " " + operatorPressed);
+  lastThingPressed = "operator";
+  hasPrevValue = true;
+}
+function getBreadCrumb(){
+  return document.getElementById("breadcrumb").textContent;
+}
+
+function displayToBreadcrumbs(info){
+  return currentBreadCrumb = document.getElementById("breadcrumb").textContent = info;
 }
 
 // dictionary to do math given multiple inputs.
@@ -70,16 +91,20 @@ var doOperations = {
 
 
 var hasDoneMath = false;
-function doMath(value1, value2, operand){
+function doMath(value1, value2, operator){
+
   if(false){
     //if response longer than 9 places, then display "digit limit reached"
   } else if (true){
     //if less than 9 places, then calculate.
     var x = parseFloat(value1);
     var y = parseFloat(value2);
-    result = doOperations[operand](x,y);
+    result = doOperations[operator](x,y);
     currentValue = result;
     document.getElementById("value").textContent = currentValue;
     hasDoneMath = true;
   }
+}
+function pressedEqual(){
+  displayToBreadcrumbs("");
 }

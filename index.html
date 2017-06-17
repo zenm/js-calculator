@@ -8,11 +8,14 @@
 <body>
   <div class="container">
     <div class="calculator">
+      <div class="breadcrumb-display">
+        <span class="show-breadcrumb" id="breadcrumb"></span>
+      </div>
       <div class="display">
         <span class="current-value" id="value">0</span>
       </div>
       <div class="all-buttons">
-        <div class="clear-row row">
+        <div class="clear-column row">
           <div class="clear button">
             <span onclick="clearAll()">C</span>
           </div>
@@ -29,7 +32,7 @@
             <span id="0" onclick="buttonPress(this)">0</span>
           </div>
         </div>
-        <div class="row">
+        <div class="clea-entry-column">
           <div class="clear button">
             <span onclick="clearEntry()">CE</span>
           </div>
@@ -43,9 +46,9 @@
             <span id="2" onclick="buttonPress(this)">2</span>
           </div>
         </div>
-        <div class="four-row row">
-          <div class="operator button">
-            <span id="div" onclick="applyOperator(this)">/</span>
+        <div class="bakspace-col">
+          <div class="backspace button">
+            <span id="div" onclick="backSpace()">&lt;&#61;</span>
           </div>
           <div class="number button">
             <span id="9" onclick="buttonPress(this)">9</span>
@@ -59,9 +62,11 @@
           <div class="period number button">
             <span id="point" onclick="buttonPress(this)">.</span>
           </div>
-
         </div>
-        <div class="row">
+        <div class="div-column">
+          <div class="operator button">
+            <span id="div" onclick="applyOperator(this)">/</span>
+          </div>
           <div class="operator button">
             <span id="multi" onclick="applyOperator(this)">*</span>
           </div>
@@ -72,7 +77,7 @@
             <span id="add" onclick="applyOperator(this)">+</span>
           </div>
           <div class="operator button">
-            <span onclick="doMath(currentValue, previousValue, operandPressed)">=</span>
+            <span id="equals" onclick="doMath(currentValue, previousValue, operatorPressed)">=</span>
           </div>
         </div>
         <div class="zero-row row">
