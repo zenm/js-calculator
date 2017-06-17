@@ -7,13 +7,17 @@
 </head>
 <body>
   <div class="container">
-    <div class="calculator">
-      <div class="breadcrumb-display">
-        <span class="show-breadcrumb" id="breadcrumb"></span>
+    <div class="calculator-area" id="calculator">
+      <div class="all-displays">
+        <div class="breadcrumb-display">
+          <span class="show-breadcrumb" id="breadcrumb"></span>
+        </div>
+        <div class="display">
+          <span class="current-value" id="value">0</span>
+        </div>
       </div>
-      <div class="display">
-        <span class="current-value" id="value">0</span>
-      </div>
+
+
       <div class="all-buttons">
         <div class="clear-column row">
           <div class="clear button">
@@ -77,13 +81,12 @@
             <span id="add" onclick="applyOperator(this)">+</span>
           </div>
           <div class="operator button">
-            <span id="equals" onclick="doMath(currentValue, previousValue, operatorPressed)">=</span>
+            <span id="equals" onclick="doMath(previousValue, currentValue, operatorPressed, this)">=</span>
           </div>
-        </div>
-        <div class="zero-row row">
         </div>
       </div>
     </div>
+    <footer><span>A <a href="#">freecode camp project</a> by Lino</span></footer>
   </div>
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"

@@ -1,3 +1,11 @@
+function setDimensions(){
+  var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  var screenHeight = h + "px";
+  document.getElementById("calculator").style.height = screenHeight;
+}
+setDimensions();
+
 //get the value on the page
 function getCurrentValue() {
   return document.getElementById("value").textContent;
@@ -29,14 +37,12 @@ function buttonPress(value){
 
   if (hasDoneMath){
     clearEntry();
-    document.getElementById("value").textContent = numberPressed;
-    currentValue = getCurrentValue();
     hasDoneMath = false;
   }
-  //reset entry if you pressed and operator and you have a previous value
+
+  //reset entry if you pressed an operator and you have a previous value
   if (lastThingPressed == "operator" && hasPrevValue == true){
     clearEntry();
-    console.log("Do I get here?");
   }
   currentValue = getCurrentValue();
   if (currentValue == "0") {
@@ -48,7 +54,6 @@ function buttonPress(value){
   }
   lastThingPressed = "operand";
   return currentValue;
-
 }
 
 var previousValue = 0;
@@ -57,19 +62,15 @@ var result = 0;
 var hasPrevValue = false;
 var lastThingPressed ="";
 
-// when I click on an operator, then I've recorded the operator sign
+// capture operator and previous value to evaluate
 function applyOperator(operator) {
-  //capture operator in variable
-  operatorPressed = operator.textContent;
   currentValue = getCurrentValue();
   if (hasPrevValue == true){
-    console.log("currentValue" + currentValue +" + "+"previousValue " + previousValue);
-    
+    doMath(currentValue, previousValue, operatorPressed, "!=")
   }
-
+  operatorPressed = operator.textContent;
   previousValue = currentValue;
-
-  displayToBreadcrumbs(getBreadCrumb()+" " + previousValue + " " + operatorPressed);
+  displayToBreadcrumbs(previousValue + " " + operatorPressed);
   lastThingPressed = "operator";
   hasPrevValue = true;
 }
@@ -91,8 +92,11 @@ var doOperations = {
 
 
 var hasDoneMath = false;
-function doMath(value1, value2, operator){
-
+function doMath(value1, value2, operator, value){
+  var isEquals = value.textContent;
+  if (isEquals == "="){
+    clearBreadCrumb();
+  }
   if(false){
     //if response longer than 9 places, then display "digit limit reached"
   } else if (true){
@@ -103,8 +107,17 @@ function doMath(value1, value2, operator){
     currentValue = result;
     document.getElementById("value").textContent = currentValue;
     hasDoneMath = true;
+    hasPrevValue = false;
   }
 }
-function pressedEqual(){
+
+// used to clear bread crumbs
+function clearBreadCrumb(){
   displayToBreadcrumbs("");
+}
+
+// remove one character on display
+function backSpace(){
+  var displayValue = getCurrentValue();
+  document.getElementById("value").textContent = displayValue.substring(0, displayValue.length - 1)
 }

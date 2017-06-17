@@ -1,25 +1,65 @@
 /*will need a monospace format font.*/
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Code Pro'), local('SourceCodePro-Regular'), url(https://fonts.gstatic.com/s/sourcecodepro/v6/mrl8jkM18OlOQN8JLgasD9V_2ngZ8dMf8fLgjYEouxg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Code Pro Bold'), local('SourceCodePro-Bold'), url(https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqUo0As1BFRXtCDhS66znb_k.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
 html{
   font-size: 16px;
+  height: 100%
+  color: #000;
 }
 
 *,
 body {
   border: 1px dotted green;
+  font-family: 'Source Code Pro', monospace;
+}
+.all-displays {
+  height: 12rem;
+  font-size: 6rem;
+  font-family: 'Source Code Pro', monospace;
+}
+.breadcrumb-display {
+  height: 2rem;
 }
 
-.all-buttons{
+.display {
+  height: 4rem;
+}
+
+.all-buttons {
   display: flex;
+}
+
+.calculator {
+  width: 100%;
+  background-color: gray;
 }
 
 .button {
   width: 2.5rem;
   height: 2.5rem;
-  background-color: #f0f;
-  color: #fff;
+  background-color: #306;
+  color: #000;
 }
+
 .button span {
   display: inline-block;
   height: 100%;
   width: 100%;
 }
+
+/*Desktop version*/
+@media only screen and (min-width: 768px) {}
