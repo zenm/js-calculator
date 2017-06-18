@@ -32,27 +32,35 @@ body {
   font-family: 'Source Code Pro', monospace;
 }
 .breadcrumb-display {
-  height: 2rem;
+  height: 3rem;
+  font-size: 2.75rem;
 }
 
 .display {
-  height: 4rem;
+  height: 7rem;
 }
 
 .all-buttons {
   display: flex;
-}
+  height: 80%;
 
+}
+/*buttons section*/
+.column-section {
+  width: 25%;
+}
 .calculator {
   width: 100%;
   background-color: gray;
 }
 
 .button {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: #306;
-  color: #000;
+  width: 100%;
+  height: 20%;
+  font-size: 3rem;
+  text-align: center;
+  background-color: #f09;
+  color: #fff;
 }
 
 .button span {
