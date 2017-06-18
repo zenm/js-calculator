@@ -26,47 +26,68 @@ body {
   border: 1px dotted green;
   font-family: 'Source Code Pro', monospace;
 }
+
+.calculator {
+  width: 100%;
+  background-color: #D3DBDF;
+  color: #BFCFD4;
+}
+
+/*display styles*/
 .all-displays {
-  height: 12rem;
+  height: 14rem;
   font-size: 6rem;
-  font-family: 'Source Code Pro', monospace;
+  margin: 1rem;
+  background-color: #577B79;
 }
 .breadcrumb-display {
   height: 3rem;
   font-size: 2.75rem;
+  margin: 1rem 0;
 }
 
 .display {
-  height: 7rem;
+  margin: 1rem 0;
+  height: 8rem;
 }
 
+/*button styles*/
 .all-buttons {
   display: flex;
-  height: 80%;
-
-}
-/*buttons section*/
-.column-section {
-  width: 25%;
-}
-.calculator {
   width: 100%;
-  background-color: gray;
+  /*height: 70rem;*/
+  display: inline-block;
+}
+
+.row {
+  display: flex;
+  min-height: 11rem;
 }
 
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 20%;
   font-size: 3rem;
   text-align: center;
-  background-color: #f09;
-  color: #fff;
+  background-color: #191A1D;
+  color: #BFCFD4;
+  margin: 1rem;
 }
 
+.clear {
+  background-color: #591A2B;
+}
+
+.button: hover{
+
+}
+
+.button:
+
 .button span {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
+
 }
 
 /*Desktop version*/

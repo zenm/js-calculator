@@ -104,7 +104,7 @@ function doMath(value1, value2, operator, value){
     var x = parseFloat(value1);
     var y = parseFloat(value2);
     result = doOperations[operator](x,y);
-    currentValue = result;
+    currentValue = result.toString().length > 10? result.toFixed(8): result;  
     document.getElementById("value").textContent = currentValue;
     hasDoneMath = true;
     hasPrevValue = false;
