@@ -11,12 +11,12 @@ function getCurrentValue() {
   return document.getElementById("value").textContent;
 }
 
-//function to clear entry
+//used to to clear entry
 function clearEntry() {
   document.getElementById("value").textContent = "0";
 }
 
-//function to clear all
+//used to clear all current and previous display entries
 function clearAll(){
   clearEntry();
   previousValue = 0;
@@ -30,10 +30,10 @@ function clearAll(){
 }
 
 var currentValue = 0;
-//when I press a button, then I see that value show up in the display.
 
+// show button presses on display
 function buttonPress(value){
-  var numberPressed = value.textContent;
+  var numberPressed = value.childNodes[1].textContent;
 
   if (hasDoneMath){
     clearEntry();
@@ -45,7 +45,11 @@ function buttonPress(value){
     clearEntry();
   }
   currentValue = getCurrentValue();
-  if (currentValue == "0") {
+  currentValueLength = currentValue.length;
+  if (currentValueLength > 9){
+    tooManyDigits();
+  }
+  else if (currentValue == "0") {
     document.getElementById("value").textContent = numberPressed;
     currentValue = getCurrentValue();
   } else {
@@ -53,6 +57,7 @@ function buttonPress(value){
     currentValue = getCurrentValue();
   }
   lastThingPressed = "operand";
+  console.log(currentValue);
   return currentValue;
 }
 
@@ -66,14 +71,15 @@ var lastThingPressed ="";
 function applyOperator(operator) {
   currentValue = getCurrentValue();
   if (hasPrevValue == true){
-    doMath(currentValue, previousValue, operatorPressed, "!=")
+    doMath(currentValue, previousValue, operatorPressed, "none")
   }
-  operatorPressed = operator.textContent;
+  operatorPressed = operator.childNodes[1].textContent;
   previousValue = currentValue;
   displayToBreadcrumbs(previousValue + " " + operatorPressed);
   lastThingPressed = "operator";
   hasPrevValue = true;
 }
+
 function getBreadCrumb(){
   return document.getElementById("breadcrumb").textContent;
 }
@@ -90,25 +96,21 @@ var doOperations = {
   "/" : function(x,y){return x / y}
 }
 
-
 var hasDoneMath = false;
+
 function doMath(value1, value2, operator, value){
-  var isEquals = value.textContent;
+
+  var isEquals = value == "none"? "": value.childNodes[1].textContent;
   if (isEquals == "="){
     clearBreadCrumb();
   }
-  if(false){
-    //if response longer than 9 places, then display "digit limit reached"
-  } else if (true){
-    //if less than 9 places, then calculate.
-    var x = parseFloat(value1);
-    var y = parseFloat(value2);
-    result = doOperations[operator](x,y);
-    currentValue = result.toString().length > 10? result.toFixed(8): result;  
-    document.getElementById("value").textContent = currentValue;
-    hasDoneMath = true;
-    hasPrevValue = false;
-  }
+  var x = parseFloat(value1);
+  var y = parseFloat(value2);
+  result = doOperations[operator](x,y);
+  currentValue = result.toString().length > 10? result.toFixed(8): result;
+  document.getElementById("value").textContent = currentValue;
+  hasDoneMath = true;
+  hasPrevValue = false;
 }
 
 // used to clear bread crumbs
@@ -120,4 +122,20 @@ function clearBreadCrumb(){
 function backSpace(){
   var displayValue = getCurrentValue();
   document.getElementById("value").textContent = displayValue.substring(0, displayValue.length - 1)
+}
+
+function addRemoveNegative(){
+  var displayValue = getCurrentValue();
+  if (displayValue == "0"){
+    // do nothing
+  } else {
+    displayValue = displayValue[0] == ["-"]? displayValue.substring(1,) : "-" + displayValue;
+  }
+  currentValue = displayValue;
+  document.getElementById("value").textContent = displayValue;
+}
+
+function tooManyDigits(){
+  clearAll();
+  displayToBreadcrumbs("too many numbers");
 }

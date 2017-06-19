@@ -18,74 +18,74 @@
       </div>
       <div class="all-buttons">
         <div class="clear-row row"><!--Clear Clear Entry Back Space Division -->
-          <div class="clear clear-entry button">
-            <span onclick="clearEntry()">CE</span>
+          <div onclick="clearEntry()" class="clear clear-entry button">
+            <span>CE</span>
           </div>
-          <div class="clear clear-all button">
-            <span onclick="clearAll()">C</span>
+          <div onclick="clearAll()" class="clear clear-all button">
+            <span>C</span>
           </div>
-          <div class="backspace button">
-            <span id="div" onclick="backSpace()">&lt;&#61;</span>
+          <div id="div" onclick="backSpace()" class="backspace button">
+            <span >&lt;&#61;</span>
           </div>
-          <div class="operator button">
-            <span id="division" onclick="applyOperator(this)">/</span>
+          <div id="division" onclick="applyOperator(this)" class="operator button">
+            <span>/</span>
           </div>
         </div>
-        <div class="seven-row row ">
+        <div class="seven-row row">
           <!-- 7, 8, 9, multiplication -->
-          <div class="number button">
-            <span id="7" onclick="buttonPress(this)">7</span>
+          <div id="7" onclick="buttonPress(this)" class="number button">
+            <span>7</span>
           </div>
-          <div class="number button">
-            <span id="8" onclick="buttonPress(this)">8</span>
+          <div id="8" onclick="buttonPress(this)" class="number button">
+            <span>8</span>
           </div>
-          <div class="number button">
-            <span id="9" onclick="buttonPress(this)">9</span>
+          <div id="9" onclick="buttonPress(this)" class="number button">
+            <span>9</span>
           </div>
-          <div class="operator button">
-            <span id="multiplication" onclick="applyOperator(this)">*</span>
+          <div id="multiplication" onclick="applyOperator(this)" class="operator button">
+            <span>*</span>
           </div>
         </div>
         <div class="four-row row">
-          <div class="number button">
-            <span id="4" onclick="buttonPress(this)">4</span>
+          <div id="4" onclick="buttonPress(this)" class="number button">
+            <span>4</span>
           </div>
-          <div class="number button">
-            <span id="5" onclick="buttonPress(this)">5</span>
+          <div id="5" onclick="buttonPress(this)" class="number button">
+            <span>5</span>
           </div>
-          <div class="number button">
-            <span id="6" onclick="buttonPress(this)">6</span>
+          <div id="6" onclick="buttonPress(this)" class="number button">
+            <span>6</span>
           </div>
-          <div class="operator button">
-            <span id="sub" onclick="applyOperator(this)">-</span>
+          <div id="sub" onclick="applyOperator(this)" class="operator button">
+            <span>-</span>
           </div>
         </div>
         <div class="one-row row">
-          <div class="number button" >
-            <span id="1" onclick="buttonPress(this)">1</span>
+          <div id="1" onclick="buttonPress(this)" class="number button" >
+            <span>1</span>
           </div>
-          <div class="number button">
-            <span id="2" onclick="buttonPress(this)">2</span>
+          <div id="2" onclick="buttonPress(this)" class="number button">
+            <span>2</span>
           </div>
-          <div class="number button">
-            <span id="3" onclick="buttonPress(this)">3</span>
+          <div id="3" class="number button" onclick="buttonPress(this)">
+            <span>3</span>
           </div>
-          <div class="operator button">
-            <span id="add" onclick="applyOperator(this)">+</span>
+          <div id="add" onclick="applyOperator(this)" class="operator button">
+            <span>+</span>
           </div>
         </div>
         <div class="plus-minus-row row">
-          <div class="add-remove-negative button">
-            <span id="0" onclick="addRemoveNegative(this)">+/-</span>
+          <div id="addRemoveNegative" class="add-remove-negative button" onclick="addRemoveNegative()">
+            <span>+/-</span>
           </div>
-          <div class="number button">
-            <span id="0" onclick="buttonPress(this)">0</span>
+          <div id="0" onclick="buttonPress(this)" class="number button">
+            <span>0</span>
           </div>
-          <div class="period number button">
-            <span id="point" onclick="buttonPress(this)">.</span>
+          <div id="point" onclick="buttonPress(this)" class="period number button">
+            <span>.</span>
           </div>
-          <div class="operator button">
-            <span id="equals" onclick="doMath(previousValue, currentValue, operatorPressed, this)">=</span>
+          <div id="equals" onclick="doMath(previousValue, currentValue, operatorPressed, this)" class="operator button">
+            <span>=</span>
           </div>
         </div>
       </div>

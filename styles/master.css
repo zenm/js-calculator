@@ -21,9 +21,7 @@ html{
   color: #000;
 }
 
-*,
 body {
-  border: 1px dotted green;
   font-family: 'Source Code Pro', monospace;
 }
 
@@ -37,13 +35,17 @@ body {
 .all-displays {
   height: 14rem;
   font-size: 6rem;
-  margin: 1rem;
+  margin: .5rem 0 1rem 0;
   background-color: #577B79;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
 }
 .breadcrumb-display {
   height: 3rem;
-  font-size: 2.75rem;
-  margin: 1rem 0;
+  font-size: 2.5rem;
+  margin: 1rem 0 .5rem 0;
+  /*padding: .5rem 0;*/
 }
 
 .display {
@@ -80,11 +82,21 @@ body {
   background-color: #591A2B;
 }
 
-.button: hover{
+.button:hover{
+
+}
+.clear.button:hover{
 
 }
 
-.button:
+.button:active{
+  background-color: #1A5948;
+
+}
+
+
+.button:active{
+}
 
 .button span {
 
