@@ -1,10 +1,10 @@
-function setDimensions(){
-  var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  var screenHeight = h + "px";
-  document.getElementById("calculator").style.height = screenHeight;
-}
-setDimensions();
+// function setDimensions(){
+//   var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+//   var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+//   var screenHeight = h + "px";
+//   document.getElementById("calculator").style.height = screenHeight;
+// }
+// setDimensions();
 
 //get the value on the page
 function getCurrentValue() {
@@ -17,7 +17,7 @@ function clearEntry() {
 }
 
 //used to clear all current and previous display entries
-function clearAll(){
+function clearAll() {
   clearEntry();
   previousValue = 0;
   currentValue = 0;
@@ -32,7 +32,7 @@ function clearAll(){
 var currentValue = 0;
 
 // show button presses on display
-function buttonPress(value){
+function buttonPress(value) {
   var numberPressed = value.childNodes[1].textContent;
 
   if (hasDoneMath){
@@ -41,7 +41,7 @@ function buttonPress(value){
   }
 
   //reset entry if you pressed an operator and you have a previous value
-  if (lastThingPressed == "operator" && hasPrevValue == true){
+  if (lastThingPressed == "operator" && hasPrevValue == true) {
     clearEntry();
   }
   currentValue = getCurrentValue();
@@ -80,33 +80,34 @@ function applyOperator(operator) {
   hasPrevValue = true;
 }
 
-function getBreadCrumb(){
+function getBreadCrumb() {
   return document.getElementById("breadcrumb").textContent;
 }
 
-function displayToBreadcrumbs(info){
+function displayToBreadcrumbs(info) {
   return currentBreadCrumb = document.getElementById("breadcrumb").textContent = info;
 }
 
 // dictionary to do math given multiple inputs.
 var doOperations = {
   "+" : function(x,y){return x + y},
-  "-" : function(x,y){return x - y},
+  "-" : function(x,y){return y - x},
   "*" : function(x,y){return x * y},
-  "/" : function(x,y){return x / y}
+  "/" : function(x,y){return y / x}
 }
 
 var hasDoneMath = false;
 
-function doMath(value1, value2, operator, value){
-
+function doMath(value1, value2, operator, value) {
+  console.log(value1, value2);
   var isEquals = value == "none"? "": value.childNodes[1].textContent;
-  if (isEquals == "="){
+  if (isEquals == "=") {
     clearBreadCrumb();
   }
   var x = parseFloat(value1);
   var y = parseFloat(value2);
   result = doOperations[operator](x,y);
+  console.log(result);
   currentValue = result.toString().length > 10? result.toFixed(8): result;
   document.getElementById("value").textContent = currentValue;
   hasDoneMath = true;
@@ -114,17 +115,17 @@ function doMath(value1, value2, operator, value){
 }
 
 // used to clear bread crumbs
-function clearBreadCrumb(){
+function clearBreadCrumb() {
   displayToBreadcrumbs("");
 }
 
 // remove one character on display
-function backSpace(){
+function backSpace() {
   var displayValue = getCurrentValue();
   document.getElementById("value").textContent = displayValue.substring(0, displayValue.length - 1)
 }
 
-function addRemoveNegative(){
+function addRemoveNegative() {
   var displayValue = getCurrentValue();
   if (displayValue == "0"){
     // do nothing
@@ -135,7 +136,7 @@ function addRemoveNegative(){
   document.getElementById("value").textContent = displayValue;
 }
 
-function tooManyDigits(){
+function tooManyDigits() {
   clearAll();
   displayToBreadcrumbs("too many numbers");
 }
