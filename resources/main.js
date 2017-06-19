@@ -57,7 +57,6 @@ function buttonPress(value) {
     currentValue = getCurrentValue();
   }
   lastThingPressed = "operand";
-  console.log(currentValue);
   return currentValue;
 }
 
@@ -99,7 +98,6 @@ var doOperations = {
 var hasDoneMath = false;
 
 function doMath(value1, value2, operator, value) {
-  console.log(value1, value2);
   var isEquals = value == "none"? "": value.childNodes[1].textContent;
   if (isEquals == "=") {
     clearBreadCrumb();
@@ -107,7 +105,6 @@ function doMath(value1, value2, operator, value) {
   var x = parseFloat(value1);
   var y = parseFloat(value2);
   result = doOperations[operator](x,y);
-  console.log(result);
   currentValue = result.toString().length > 10? result.toFixed(8): result;
   document.getElementById("value").textContent = currentValue;
   hasDoneMath = true;
