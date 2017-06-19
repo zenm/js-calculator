@@ -93,7 +93,7 @@ var doOperations = {
   "+" : function(x,y){return x + y},
   "-" : function(x,y){return y - x},
   "*" : function(x,y){return x * y},
-  "/" : function(x,y){return y / x}
+  "/" : function(x,y){return x / y}
 }
 
 var hasDoneMath = false;
