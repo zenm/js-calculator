@@ -13,7 +13,21 @@ function getCurrentValue() {
 
 //used to to clear entry
 function clearEntry() {
-  document.getElementById("value").textContent = "0";
+  showNumberInDisplay(0);
+}
+
+//used to put values into display
+function showNumberInDisplay(number){
+  var lengthOfDisplayValue = number.length;
+  console.log(lengthOfDisplayValue);
+  // if (number.indexOf(".") != -1){
+  //
+  // }
+  // allow for 8 places with a decimal
+  // run checks on number to see if allowable.
+
+  return document.getElementById("value").textContent = number;
+
 }
 
 //used to clear all current and previous display entries
@@ -25,8 +39,9 @@ function clearAll() {
   result = 0;
   hasDoneMath = false;
   hasPrevValue = false;
-  displayToBreadcrumbs("");
-  document.getElementById("value").textContent = currentValue;
+  hasTooManyDigits = false;
+  showBreadcrumbs("");
+  showNumberInDisplay(currentValue);
 }
 
 var currentValue = 0;
@@ -46,14 +61,14 @@ function buttonPress(value) {
   }
   currentValue = getCurrentValue();
   currentValueLength = currentValue.length;
-  if (currentValueLength > 9){
+  /*if (currentValueLength > 9){
     tooManyDigits();
   }
-  else if (currentValue == "0") {
-    document.getElementById("value").textContent = numberPressed;
+  else */if (currentValue == "0") {
+    showNumberInDisplay(numberPressed) ;
     currentValue = getCurrentValue();
   } else {
-    document.getElementById("value").textContent = currentValue + numberPressed;
+    showNumberInDisplay(currentValue + numberPressed);
     currentValue = getCurrentValue();
   }
   lastThingPressed = "operand";
@@ -65,6 +80,7 @@ var operatorPressed = "";
 var result = 0;
 var hasPrevValue = false;
 var lastThingPressed ="";
+var hasTooManyDigits = false;
 
 // capture operator and previous value to evaluate
 function applyOperator(operator) {
@@ -74,7 +90,7 @@ function applyOperator(operator) {
   }
   operatorPressed = operator.childNodes[1].textContent;
   previousValue = currentValue;
-  displayToBreadcrumbs(previousValue + " " + operatorPressed);
+  showBreadcrumbs(previousValue + " " + operatorPressed);
   lastThingPressed = "operator";
   hasPrevValue = true;
 }
@@ -83,7 +99,7 @@ function getBreadCrumb() {
   return document.getElementById("breadcrumb").textContent;
 }
 
-function displayToBreadcrumbs(info) {
+function showBreadcrumbs(info) {
   return currentBreadCrumb = document.getElementById("breadcrumb").textContent = info;
 }
 
@@ -95,8 +111,13 @@ var doOperations = {
   "/" : function(x,y){return x / y}
 }
 
+/*****    doMath()
+** value1 : the current value in the display
+** value2 : the previous value in the calculator's memory
+** operator : the operation to do
+** value : used to find weather reference to this points to "none" or the element in the DOM. This will determine equals calculations.
+****************/
 var hasDoneMath = false;
-
 function doMath(value1, value2, operator, value) {
   var isEquals = value == "none"? "": value.childNodes[1].textContent;
   if (isEquals == "=") {
@@ -105,21 +126,26 @@ function doMath(value1, value2, operator, value) {
   var x = parseFloat(value1);
   var y = parseFloat(value2);
   result = doOperations[operator](x,y);
-  currentValue = result.toString().length > 10? result.toFixed(8): result;
-  document.getElementById("value").textContent = currentValue;
-  hasDoneMath = true;
-  hasPrevValue = false;
+  // add conditional to check if value is too large.
+  if (result.toString().length > 10){
+    tooManyDigits();
+  } else {
+    currentValue = result;
+    showNumberInDisplay(currentValue);
+    hasDoneMath = true;
+    hasPrevValue = false;
+  }
 }
 
 // used to clear bread crumbs
 function clearBreadCrumb() {
-  displayToBreadcrumbs("");
+  showBreadcrumbs("");
 }
 
 // remove one character on display
 function backSpace() {
   var displayValue = getCurrentValue();
-  document.getElementById("value").textContent = displayValue.substring(0, displayValue.length - 1)
+  showNumberInDisplay(displayValue.substring(0, displayValue.length - 1))
 }
 
 function addRemoveNegative() {
@@ -130,10 +156,11 @@ function addRemoveNegative() {
     displayValue = displayValue[0] == ["-"]? displayValue.substring(1,) : "-" + displayValue;
   }
   currentValue = displayValue;
-  document.getElementById("value").textContent = displayValue;
+  showNumberInDisplay(displayValue);
 }
 
 function tooManyDigits() {
   clearAll();
-  displayToBreadcrumbs("too many numbers");
+  showBreadcrumbs("too many numbers");
+  hasTooManyDigits = true;
 }
