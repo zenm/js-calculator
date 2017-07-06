@@ -1,11 +1,3 @@
-// function setDimensions(){
-//   var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-//   var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-//   var screenHeight = h + "px";
-//   document.getElementById("calculator").style.height = screenHeight;
-// }
-// setDimensions();
-
 //get the value on the page
 function getCurrentValue() {
   return document.getElementById("value").textContent;
@@ -18,16 +10,14 @@ function clearEntry() {
 
 //used to put values into display
 function showNumberInDisplay(number){
-  var lengthOfDisplayValue = number.length;
-  console.log(lengthOfDisplayValue);
-  // if (number.indexOf(".") != -1){
-  //
-  // }
-  // allow for 8 places with a decimal
-  // run checks on number to see if allowable.
-
-  return document.getElementById("value").textContent = number;
-
+  var stringNumber = number.toString();
+  var lengthOfValue = stringNumber.length;
+  if (number > 9999999999 || number <= -9999999999) {
+    return hasTooManyDigits = true;
+  } else {
+  stringNumber = stringNumber.substring(0,11);
+  return document.getElementById("value").textContent = stringNumber;
+  }
 }
 
 //used to clear all current and previous display entries
@@ -46,25 +36,26 @@ function clearAll() {
 
 var currentValue = 0;
 
-// show button presses on display
-function buttonPress(value) {
+function showButtonPress(value) {
+  removeWarning();
   var numberPressed = value.childNodes[1].textContent;
-
+  // clear old calculation.
   if (hasDoneMath){
     clearEntry();
     hasDoneMath = false;
   }
-
-  //reset entry if you pressed an operator and you have a previous value
+  //reset entry if you pressed an operator as your previous entry and you have a previous value
   if (lastThingPressed == "operator" && hasPrevValue == true) {
     clearEntry();
   }
   currentValue = getCurrentValue();
-  currentValueLength = currentValue.length;
-  /*if (currentValueLength > 9){
-    tooManyDigits();
+  var currentValueLength = currentValue.length;
+  if (currentValueLength > 9) {
+    showWarning(warningMessage);
   }
-  else */if (currentValue == "0") {
+
+  // show zero in the display, unless you write over it.
+  if (currentValue == "0") {
     showNumberInDisplay(numberPressed) ;
     currentValue = getCurrentValue();
   } else {
@@ -72,7 +63,7 @@ function buttonPress(value) {
     currentValue = getCurrentValue();
   }
   lastThingPressed = "operand";
-  return currentValue;
+    // return currentValue;
 }
 
 var previousValue = 0;
@@ -81,18 +72,23 @@ var result = 0;
 var hasPrevValue = false;
 var lastThingPressed ="";
 var hasTooManyDigits = false;
+var warningMessage = "too many numbers";
 
 // capture operator and previous value to evaluate
 function applyOperator(operator) {
   currentValue = getCurrentValue();
-  if (hasPrevValue == true){
+  if (hasPrevValue == true) {
     doMath(currentValue, previousValue, operatorPressed, "none")
   }
+  if (hasTooManyDigits == true){
+    return showWarning(warningMessage);
+  } else {
   operatorPressed = operator.childNodes[1].textContent;
   previousValue = currentValue;
   showBreadcrumbs(previousValue + " " + operatorPressed);
   lastThingPressed = "operator";
   hasPrevValue = true;
+  }
 }
 
 function getBreadCrumb() {
@@ -106,7 +102,7 @@ function showBreadcrumbs(info) {
 // dictionary to do math given multiple inputs.
 var doOperations = {
   "+" : function(x,y){return x + y},
-  "-" : function(x,y){return y - x},
+  "-" : function(x,y){return x - y},
   "*" : function(x,y){return x * y},
   "/" : function(x,y){return x / y}
 }
@@ -115,7 +111,7 @@ var doOperations = {
 ** value1 : the current value in the display
 ** value2 : the previous value in the calculator's memory
 ** operator : the operation to do
-** value : used to find weather reference to this points to "none" or the element in the DOM. This will determine equals calculations.
+** value : used to find whether reference to this points to "none" or the element in the DOM. This will determine equals calculations.
 ****************/
 var hasDoneMath = false;
 function doMath(value1, value2, operator, value) {
@@ -126,15 +122,15 @@ function doMath(value1, value2, operator, value) {
   var x = parseFloat(value1);
   var y = parseFloat(value2);
   result = doOperations[operator](x,y);
-  // add conditional to check if value is too large.
-  if (result.toString().length > 10){
-    tooManyDigits();
-  } else {
+    // add conditional to check if value is too large.
+    // if (result.toString().length > 10){
+    //   showWarning(warningMessage);
+    // } else {
     currentValue = result;
     showNumberInDisplay(currentValue);
     hasDoneMath = true;
     hasPrevValue = false;
-  }
+  // }
 }
 
 // used to clear bread crumbs
@@ -159,8 +155,15 @@ function addRemoveNegative() {
   showNumberInDisplay(displayValue);
 }
 
-function tooManyDigits() {
+function showWarning(warningMessage) {
   clearAll();
-  showBreadcrumbs("too many numbers");
+  showBreadcrumbs(warningMessage);
   hasTooManyDigits = true;
+}
+
+function removeWarning() {
+  if (getBreadCrumb() == warningMessage) {
+    showBreadcrumbs("");
+    hasTooManyDigits = false;
+  }
 }
