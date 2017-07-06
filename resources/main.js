@@ -77,13 +77,16 @@ var warningMessage = "too many numbers";
 // capture operator and previous value to evaluate
 function applyOperator(operator) {
   currentValue = getCurrentValue();
+  console.log(operatorPressed);
   if (hasPrevValue == true) {
-    doMath(currentValue, previousValue, operatorPressed, "none")
+    console.log(currentValue + ","+ previousValue + "," + operatorPressed);
+    doMath(previousValue, currentValue, operatorPressed, "none")
   }
   if (hasTooManyDigits == true){
     return showWarning(warningMessage);
   } else {
   operatorPressed = operator.childNodes[1].textContent;
+  console.log(operatorPressed);
   previousValue = currentValue;
   showBreadcrumbs(previousValue + " " + operatorPressed);
   lastThingPressed = "operator";
@@ -102,7 +105,7 @@ function showBreadcrumbs(info) {
 // dictionary to do math given multiple inputs.
 var doOperations = {
   "+" : function(x,y){return x + y},
-  "-" : function(x,y){return x - y},
+  "-" : function(x,y){return y - x},
   "*" : function(x,y){return x * y},
   "/" : function(x,y){return x / y}
 }
@@ -115,6 +118,7 @@ var doOperations = {
 ****************/
 var hasDoneMath = false;
 function doMath(value1, value2, operator, value) {
+  console.log();
   var isEquals = value == "none"? "": value.childNodes[1].textContent;
   if (isEquals == "=") {
     clearBreadCrumb();
