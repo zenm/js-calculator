@@ -105,7 +105,7 @@ function showBreadcrumbs(info) {
 // dictionary to do math given multiple inputs.
 var doOperations = {
   "+" : function(x,y){return x + y},
-  "-" : function(x,y){return y - x},
+  "-" : function(x,y){return x - y},
   "*" : function(x,y){return x * y},
   "/" : function(x,y){return x / y}
 }
